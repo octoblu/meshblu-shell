@@ -1,0 +1,15 @@
+{
+  "name": "skynet-gw-shell",
+  "version": "0.1.0",
+  "description": "Skynet Gateway plugin to execute a shell command",
+  "keywords": [
+    "skynet-plugin"
+  ],
+  "repository": "git@github.com:monteslu/skynet-gw-shell.git",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Luis Montes",
+  "license": "MIT"
+}
