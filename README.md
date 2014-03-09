@@ -1,4 +1,4 @@
-skynet-greeting
+skynet-gw-shell
 ===============
 
-Skynet Gateway plugin example
+Skynet Gateway plugin execute shell commands

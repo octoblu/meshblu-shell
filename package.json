@@ -1,6 +1,6 @@
 {
   "name": "skynet-gw-shell",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "Skynet Gateway plugin to execute a shell command",
   "keywords": [
     "skynet-plugin"
