@@ -1,15 +1,16 @@
 {
-  "name": "skynet-gw-shell",
-  "version": "0.2.0",
-  "description": "Skynet Gateway plugin to execute a shell command",
-  "keywords": [
-    "skynet-plugin"
-  ],
-  "repository": "git@github.com:monteslu/skynet-gw-shell.git",
-  "main": "index.js",
+  "name": "meshblu-shell",
+  "repository": "octoblu/meshblu-shell",
+  "version": "1.0.1",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node command.js"
   },
-  "author": "Luis Montes",
-  "license": "MIT"
+  "dependencies": {
+    "skynet": "^1.8.3",
+    "debug": "^2.1.0"
+  },
+  "keywords": [
+    "meshblu-connector",
+    "gateblu"
+  ]
 }

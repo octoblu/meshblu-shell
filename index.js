@@ -1,73 +1,80 @@
-var sys = require('sys')
+'use strict';
+var util = require('util');
+var EventEmitter = require('events').EventEmitter;
+var debug = require('debug')('meshblu-shell')
 var exec = require('child_process').exec;
 
-function Plugin(messenger, options){
-  this.messenger = messenger;
-  this.options = options;
-  return this;
-}
-
-var optionsSchema = {
+var MESSAGE_SCHEMA = {
   type: 'object',
-    properties: {
-      shellCommand: {
-        type: 'string',
-        required: true
-    }
-  }
-};
-
-//any args to the shell
-var messageSchema = {
-  type: 'array',
   properties: {
-    text: {
+    options: {
+      type: 'array',
+      required: true
+    }
+  }};
+
+var OPTIONS_SCHEMA = {
+  type: 'object',
+  properties: {
+    shellCommand: {
       type: 'string',
       required: true
     }
   }
 };
 
-function cleanArg(arg){
+function Plugin(){
+  this.options = {};
+  this.messageSchema = MESSAGE_SCHEMA;
+  this.optionsSchema = OPTIONS_SCHEMA;
+  return this;
+}
+util.inherits(Plugin, EventEmitter);
+
+var cleanArg = function(arg){
   return '\"' + arg.replace(/\"\'/g,'') +'\"';
 }
 
-Plugin.prototype.onMessage = function(data){
+Plugin.prototype.onMessage = function(message){
+  var payload = message.payload;
+  this.executeShell(payload);
+};
 
-  // http://nodejs.org/api.html#_child_processes
+Plugin.prototype.onConfig = function(device){
+  this.setOptions(device.options||{});
+};
 
+Plugin.prototype.setOptions = function(options){
+  this.options = options;
+};
+
+Plugin.prototype.executeShell = function(data){
   var child;
 
   var command = this.options.shellCommand;
-  if(data.payload){
+  debug('Executing: ' + command, data);
+  if(data.options){
     command+= ' ';
-    if(Array.isArray(data.payload)){
-      data.payload.forEach(function(arg){
+    if(Array.isArray(data.options)){
+      data.options.forEach(function(arg){
         command+= ' ' + cleanArg(arg);
       });
-    }else if(typeof data.payload == 'string'){
-      command+= ' ' + cleanArg(data.payload);
+    }else if(typeof data.options == 'string'){
+      command+= ' ' + cleanArg(data.options);
     }
   }
 
   child = exec(command, function (error, stdout, stderr) {
-    sys.print('stdout: ' + stdout);
-    sys.print('stderr: ' + stderr);
+    debug('stdout: ' + stdout);
+    debug('stderr: ' + stderr);
     if (error !== null) {
-      console.log('exec error: ' + error);
+      console.error('exec error: ' + error);
     }
   });
-
-};
-
-Plugin.prototype.destroy = function(){
-  //clean up
-  console.log('destroying.', this.options);
-};
-
+}
 
 module.exports = {
-  Plugin: Plugin,
-  optionsSchema: optionsSchema,
-  messageSchema: messageSchema
+  messageSchema: MESSAGE_SCHEMA,
+  optionsSchema: OPTIONS_SCHEMA,
+  Plugin: Plugin
 };
