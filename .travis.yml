@@ -1,0 +1,13 @@
+language: node_js
+node_js:
+- '0.10'
+deploy:
+  provider: npm
+  skip_cleanup: true
+  clean_up: false
+  email: jade.meskill@gmail.com
+  api_key:
+    secure: IEd62lyrZCT+h9zLZEi2lpJkMQrNaWlMnf9zq1LJerkrb1Fealrg6pPKw139J27fA70VK6ypEsDU4C+QYzQaMLtA1bH6iwoh9edt489M4CAWOTp/6c5znxpCNOZRAiZT4LN/BazSr9FOiFpsO7m5x0ZQ6ACc9mKIFZuWM0ZKpyk=
+  on:
+    tags: true
+    all_branches: true
