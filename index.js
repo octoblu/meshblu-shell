@@ -9,9 +9,14 @@ var MESSAGE_SCHEMA = {
   properties: {
     options: {
       type: 'array',
-      required: true
-    }
-  }};
+      items: {
+        title: 'Argument',
+        type: 'string'
+      }
+    },
+    required: ['options']
+  }
+};
 
 var OPTIONS_SCHEMA = {
   type: 'object',
