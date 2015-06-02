@@ -37,7 +37,7 @@ function Plugin(){
 util.inherits(Plugin, EventEmitter);
 
 var cleanArg = function(arg){
-  return '\"' + arg.replace(/\"\'/g,'') +'\"';
+  return '\"' + String(arg).replace(/\"\'/g,'') +'\"';
 }
 
 Plugin.prototype.onMessage = function(message){
