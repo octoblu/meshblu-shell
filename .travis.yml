@@ -1,15 +1,18 @@
+sudo: false
 language: node_js
+cache:
+  bundler: true
+  directories:
+  - node_modules
 node_js:
 - '0.10'
-notifications:
-  flowdock: e7454f5285e7b9ab67009802d5560490
 deploy:
   provider: npm
   skip_cleanup: true
   clean_up: false
-  email: jade.meskill@gmail.com
-  api_key:
-    secure: IEd62lyrZCT+h9zLZEi2lpJkMQrNaWlMnf9zq1LJerkrb1Fealrg6pPKw139J27fA70VK6ypEsDU4C+QYzQaMLtA1bH6iwoh9edt489M4CAWOTp/6c5znxpCNOZRAiZT4LN/BazSr9FOiFpsO7m5x0ZQ6ACc9mKIFZuWM0ZKpyk=
+  email: serveradmin@octoblu.com
   on:
     tags: true
     all_branches: true
+  api_key:
+    secure: HhompYv2BcyP4KviAFbyGUbNLRMQxcZ9Wx7+6uhKHTDcz+mfeGfwTIFr9A2XLai0QsvZsbqfvdG6SKnjvASL1I8tYR9ivXROblUuY/C8WN0afxxyiK2QAZf41q7Ls+zGSyOKvGZ342aAdsQwX04X8B6ALKKuK0ys2+kKmCqVRYw=
