@@ -3,34 +3,13 @@ node_js:
 - '0.10'
 before_install:
   - npm install npm -g
-before_deploy:
-  - npm install ws browserify coffeeify
-  - mkdir -p deploy/meshblu-shell/latest
-  - mkdir -p deploy/meshblu-shell/$TRAVIS_TAG
-  - node_modules/.bin/browserify -t coffeeify -s Connector connector.js > deploy/meshblu-shell/latest/meshblu-shell.js
-  - gzip deploy/meshblu-shell/latest/meshblu-shell.js
-  - mv deploy/meshblu-shell/latest/meshblu-shell.js.gz deploy/meshblu-shell/latest/meshblu-shell.js
-  - cp deploy/meshblu-shell/latest/meshblu-shell.js deploy/meshblu-shell/$TRAVIS_TAG/meshblu-shell.js
 deploy:
-  - provider: s3
-    region: us-west-2
-    skip_cleanup: true
-    detect_encoding: true
-    access_key_id: replace-me
-    secret_access_key:
-      secure: replace-me
-    bucket: octoblu-cdn
-    local-dir: deploy
-    upload-dir: js
-    on:
-      tags: true
-      all_branches: true
   - provider: npm
     skip_cleanup: true
     clean_up: false
-    email: replace-me
+    email: serveradmin@octoblu.com
     api_key:
-      secure: replace-me
+      secure: "lr4mJq8Itkkr0QUN6pwtgEIg7Ro8+cNgJrz+EJnpGUg7VflJtgxn7lYtVcVpc6Qv/n2esuDMxL5HKj+rvfHQQ1JQw2u1vNi24WQnwjVJfjgwRirpxVguraqHnLYh1Y5MCRSJRCo67f9l9jg1VU0qiAFjE6SXlZ1rtW8FbFQlAsQ="
     on:
       tags: true
       all_branches: true

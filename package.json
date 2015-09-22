@@ -1,7 +1,7 @@
 {
   "name": "meshblu-shell",
   "repository": "octoblu/meshblu-shell",
-  "version": "2.0.3",
+  "version": "2.0.4",
   "main": "connector.js",
   "scripts": {
     "preinstall": "node -e \"try{require('./skip-install.js')}catch(e){}\"",
